@@ -21,6 +21,11 @@ function getRandom(low,high){
 	return Math.ceil( Math.random()*(high-low)+low );
 }
 
+//随机获取旋转角度控制在正负30度
+function get30Deg(){
+	return ( (Math.random()>0.5?'':'-')+Math.ceil( Math.random()*30 ) );
+}
+
 module.exports=React.createClass({
 	imgPos:{
 		centerP:{//中心点取值范围
@@ -39,7 +44,7 @@ module.exports=React.createClass({
 	},
 	getInitialState:function(){
 		return {
-			//每一个数组元素是一个状态对象，包含位置信息
+			//每一个数组元素是一个状态对象，包含位置信息,旋转角度
 			//为图片数组添加位置对象
 			imgArr:[
 				/*
@@ -47,7 +52,8 @@ module.exports=React.createClass({
 					pos:{
 						left:0,
 						top:0
-					}
+					},
+					rotate:0
 				}
 				*/
 			]
@@ -58,11 +64,13 @@ module.exports=React.createClass({
 	rerange:function(centerindex){
 		//居中的图片的状态信息，是图片居中
 		//splice取出来1个中心图片，原数组不存在该图片
-
 		var stateImgArr=this.state.imgArr;
 		var imgcenterArr=[];//存中心图片，只有一张中心图片
 		imgcenterArr=stateImgArr.splice(centerindex,1);
 		imgcenterArr[0].pos=this.imgPos.centerP;
+
+		//居中的图片旋转角度为0
+		imgcenterArr[0].rotate=0;
 
 		//上侧图片的状态信息，数量为一个或者0个
 		var imgTopArr=[];//存上侧图片
@@ -81,7 +89,9 @@ module.exports=React.createClass({
 					//this.imgPos.vP.yTop[0]-[1]
 					top:getRandom( _this.imgPos.vP.yTop[0] , _this.imgPos.vP.yTop[0] ),
 					left:getRandom( _this.imgPos.vP.x[0] , _this.imgPos.vP.x[1] )
-				}
+				};
+				//图片旋转
+				imgTopArr[i].rotate=get30Deg();
 		});
 
 		//布局左侧，右侧的图片，前一半在左边，后一半在右边
@@ -97,7 +107,9 @@ module.exports=React.createClass({
 			stateImgArr[i].pos={
 				top:getRandom( _this.imgPos.hP.y[0], _this.imgPos.hP.y[1] ),
 				left:getRandom( hPTemp[0], hPTemp[1] )
-			}
+			};
+			//图片旋转
+			stateImgArr[i].rotate=get30Deg();
 
 		}
 
@@ -170,7 +182,8 @@ module.exports=React.createClass({
 					pos:{
 						left:0,
 						top:0
-					}
+					},
+					rotate:0
 				}
 			}
 

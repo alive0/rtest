@@ -9,6 +9,14 @@ module.exports=React.createClass({
 			styleObj=this.props.random.pos;
 		}
 
+		//旋转角度不为0时候旋转
+		if(this.props.random.rotate){
+			var brow=['-webkit-','-moz-','-ms-','-o-',''];
+			brow.forEach(function(v){
+				styleObj[v+'transform']='rotate('+this.props.random.rotate+'deg)';
+			}.bind(this));
+		}
+
 		return (
 			<figure className="img-figure" style={styleObj}>
 				<img src={this.props.data.url} alt={this.props.data.title}/>
