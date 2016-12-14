@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "bf64ca98b769d17668f0"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "27ed0b61b075b06703ba"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -594,9 +594,9 @@
 	var $ = __webpack_require__(189);
 	__webpack_require__(209);
 
-	var images = __webpack_require__(215);
+	var Imgs = __webpack_require__(215);
 
-	ReactDOM.render(React.createElement('images', null), document.getElementById('content'));
+	ReactDOM.render(React.createElement(Imgs, null), document.getElementById('content'));
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(201); if (makeExportsHot(module, __webpack_require__(98))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "photo.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)(module)))
@@ -33186,13 +33186,87 @@
 	'use strict';
 
 	var React = __webpack_require__(98);
-	var imageDatas = __webpack_require__(216);
+
+	//单个图片组件信息--图片地址-标题-描述
+	var Fig = __webpack_require__(216);
+
+	//存取图片信息，地址信息
+	var imageDatas = __webpack_require__(217);
+
+	imageDatas = function (imageDatasArr) {
+		for (var i = 0; i < imageDatasArr.length; i++) {
+			imageDatasArr[i].url = __webpack_require__(218)("./" + imageDatasArr[i].fileName);
+		}
+		return imageDatasArr;
+	}(imageDatas);
+
+	module.exports = React.createClass({
+		displayName: 'exports',
+
+		render: function render() {
+
+			var imgFigs = [],
+			    controllUnits = [];
+			imageDatas.forEach(function (value, index) {
+				imgFigs.push(React.createElement(Fig, { data: value, key: index }));
+			});
+
+			return React.createElement(
+				'section',
+				{ className: 'stage' },
+				React.createElement(
+					'section',
+					{ className: 'img-sec' },
+					imgFigs
+				),
+				React.createElement(
+					'nav',
+					{ className: 'controller-nav' },
+					controllUnits
+				)
+			);
+		}
+	});
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(201); if (makeExportsHot(module, __webpack_require__(98))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "img.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)(module)))
 
 /***/ },
 /* 216 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(2), RootInstanceProvider = __webpack_require__(10), ReactMount = __webpack_require__(12), React = __webpack_require__(98); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	"use strict";
+
+	var React = __webpack_require__(98);
+
+	module.exports = React.createClass({
+		displayName: "exports",
+
+		render: function render() {
+			return React.createElement(
+				"figure",
+				{ className: "img-figure" },
+				React.createElement("img", { src: this.props.data.url, alt: this.props.data.title }),
+				React.createElement(
+					"figcaption",
+					null,
+					React.createElement(
+						"h2",
+						{ className: "img-title" },
+						this.props.data.title
+					)
+				)
+			);
+		}
+	});
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(201); if (makeExportsHot(module, __webpack_require__(98))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "fig.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)(module)))
+
+/***/ },
+/* 217 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -33277,6 +33351,138 @@
 			"desc": "Here he comes Here comes Speed Racer.  "
 		}
 	];
+
+/***/ },
+/* 218 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var map = {
+		"./1.jpg": 219,
+		"./10.jpg": 220,
+		"./11.jpg": 221,
+		"./12.jpg": 222,
+		"./13.jpg": 223,
+		"./14.jpg": 224,
+		"./15.jpg": 225,
+		"./16.jpg": 226,
+		"./2.jpg": 227,
+		"./3.jpg": 228,
+		"./4.jpg": 229,
+		"./5.jpg": 230,
+		"./6.jpg": 231,
+		"./7.jpg": 232,
+		"./8.jpg": 233,
+		"./9.jpg": 234
+	};
+	function webpackContext(req) {
+		return __webpack_require__(webpackContextResolve(req));
+	};
+	function webpackContextResolve(req) {
+		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
+	};
+	webpackContext.keys = function webpackContextKeys() {
+		return Object.keys(map);
+	};
+	webpackContext.resolve = webpackContextResolve;
+	module.exports = webpackContext;
+	webpackContext.id = 218;
+
+
+/***/ },
+/* 219 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "bd63d00550899d17d96eab0e523e191a.jpg";
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "d751435c79f8947a09d2247b694c9f38.jpg";
+
+/***/ },
+/* 221 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "751053009988ada921063b9c976a0231.jpg";
+
+/***/ },
+/* 222 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "851d60748c878027e7a52c42c441b138.jpg";
+
+/***/ },
+/* 223 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "4f0b2bbd13d80bb56db798dffb9bf438.jpg";
+
+/***/ },
+/* 224 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "707f3ac5e9fc103169b34fe0b01f59d3.jpg";
+
+/***/ },
+/* 225 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "a3b5eb2fd4be679210afd738fcf8edb8.jpg";
+
+/***/ },
+/* 226 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "ffa5badd054f465bf879543954816c29.jpg";
+
+/***/ },
+/* 227 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "6fd1361a03f7cf3438b3aab6bc409c7e.jpg";
+
+/***/ },
+/* 228 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "c88397eabc61b0cd856c63dba9af15f6.jpg";
+
+/***/ },
+/* 229 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "ace3d5b785f01689d46740d26b55d68a.jpg";
+
+/***/ },
+/* 230 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "cdb0062838530082085a0dd3e2f0b1d1.jpg";
+
+/***/ },
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "1555904a3ed0f25d93fafb91d409d99e.jpg";
+
+/***/ },
+/* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "ed3b6061163c390a6c6a9aea559e6d06.jpg";
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "be1a90b6fc3184f6a923cb3720b92ec4.jpg";
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "120c52ed00e61c10a538b35b498020e4.jpg";
 
 /***/ }
 /******/ ]);
