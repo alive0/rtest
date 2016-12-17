@@ -6,7 +6,7 @@ var Fig=require('./fig.js');
 
 //存取图片信息，地址信息
 var imageDatas = require('../data/imageDatas.json');
-
+var w=document.getElementById('content').offsetHeight;
 
 imageDatas=(function(imageDatasArr){
 
@@ -53,11 +53,30 @@ module.exports=React.createClass({
 						left:0,
 						top:0
 					},
-					rotate:0
+					rotate:0,
+					//正反面标志，FALSE正面
+					flag:false,
+					iscenter:false
 				}
 				*/
 			]
 		}
+	},
+
+	//翻转，居中函数运用了闭包，以便传值index
+	clickfn:function(index){
+		return function(){
+				var newimgArr=this.state.imgArr;
+				newimgArr[index].flag=!newimgArr[index].flag;
+				this.setState({
+					imgArr:newimgArr
+				});
+		}.bind(this)
+	},
+	center:function(index){
+		return function(){
+			this.rerange(index);
+		}.bind(this);
 	},
 
 	//重新布局图片状态，包含位置信息
@@ -71,6 +90,8 @@ module.exports=React.createClass({
 
 		//居中的图片旋转角度为0
 		imgcenterArr[0].rotate=0;
+		imgcenterArr[0].iscenter=true;
+
 
 		//上侧图片的状态信息，数量为一个或者0个
 		var imgTopArr=[];//存上侧图片
@@ -92,6 +113,7 @@ module.exports=React.createClass({
 				};
 				//图片旋转
 				imgTopArr[i].rotate=get30Deg();
+				imgTopArr[i].iscenter=false;
 		});
 
 		//布局左侧，右侧的图片，前一半在左边，后一半在右边
@@ -110,6 +132,7 @@ module.exports=React.createClass({
 			};
 			//图片旋转
 			stateImgArr[i].rotate=get30Deg();
+			stateImgArr[i].iscenter=false;
 
 		}
 
@@ -131,8 +154,9 @@ module.exports=React.createClass({
 	componentDidMount:function(){
 		//舞台大小计算
 		var stageDom=ReactDOM.findDOMNode(this.refs.stage),
-			stageW=stageDom.scrollWidth,
+			stageW=document.body.scrollWidth,
 			stageH=stageDom.scrollHeight;
+			console.info(w);
 
 		//图片大小计算
 		var imgDom=ReactDOM.findDOMNode(this.refs.img0),
@@ -183,11 +207,13 @@ module.exports=React.createClass({
 						left:0,
 						top:0
 					},
-					rotate:0
+					rotate:0,
+					flag:false,
+					iscenter:false
 				}
 			}
 
-			imgFigs.push(<Fig data={value} key={index} ref={'img'+index} random={this.state.imgArr[index] } />);
+			imgFigs.push(<Fig data={value} key={index} ref={'img'+index} random={this.state.imgArr[index] } clickfn={this.clickfn(index)} center={this.center(index)} />);
 		}.bind(this));
 
 		return (
