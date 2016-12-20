@@ -3,6 +3,7 @@ var ReactDOM = require('react-dom');
 
 //单个图片组件信息--图片地址-标题-描述
 var Fig=require('./fig.js');
+var Com=require('./com.js');
 
 //存取图片信息，地址信息
 var imageDatas = require('../data/imageDatas.json');
@@ -95,7 +96,7 @@ module.exports=React.createClass({
 
 		//上侧图片的状态信息，数量为一个或者0个
 		var imgTopArr=[];//存上侧图片
-		var topNum=Math.ceil(Math.random()*2);//随机取0,1
+		var topNum=Math.floor(Math.random()*2);//随机取0,1
 		var topIndex=0; //上侧图片的位置索引
 
 		topIndex=Math.ceil( Math.random()*(stateImgArr.length-topNum) );
@@ -214,6 +215,8 @@ module.exports=React.createClass({
 			}
 
 			imgFigs.push(<Fig data={value} key={index} ref={'img'+index} random={this.state.imgArr[index] } clickfn={this.clickfn(index)} center={this.center(index)} />);
+
+			controllUnits.push( <Com key={index} random={this.state.imgArr[index]} clickfn={this.clickfn(index)} center={this.center(index)} /> );
 		}.bind(this));
 
 		return (

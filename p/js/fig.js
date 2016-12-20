@@ -20,9 +20,9 @@ module.exports=React.createClass({
 
 		//旋转角度不为0时候旋转
 		if(this.props.random.rotate){
-			var brow=['-webkit-','-moz-','-ms-','-o-',''];
+			var brow=['WebkitTransform','MozTransform','msTransform','OTransform','transform'];
 			brow.forEach(function(v){
-				styleObj[v+'transform']='rotate('+this.props.random.rotate+'deg)';
+				styleObj[v]='rotate('+this.props.random.rotate+'deg)';
 			}.bind(this));
 		}
 

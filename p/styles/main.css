@@ -22,7 +22,7 @@ p{padding: 0;margin: 0;}
 .stage {
     position: relative;
 
-    width: 100%;
+    width: 1346px;
     height: 680px;
 }
 /* stage -- end */
@@ -37,7 +37,7 @@ p{padding: 0;margin: 0;}
 
     background-color: #ddd;
 
-    perspective: 1800px;
+    perspective: 2000px;
 }
 
         .img-figure {
@@ -52,27 +52,27 @@ p{padding: 0;margin: 0;}
 
             box-sizing: border-box;
             cursor: pointer;
-            transform-origin: 0 50% 0;
             transform-style: preserve-3d;
-            transition: transform .6s ease-in-out, left .6s ease-in-out, top .6s ease-in-out;
+            transform-origin: 0 50% 0;
+            transition: all .5s linear;
         }
 
-            .is-inverse {
-                transform: translate(320px) rotateY(180deg);
+            .img-figure.is-inverse {
+                transform:translate(320px) rotateY(180deg)
             }
 
         figcaption {
             text-align: center;
         }
 
-            .img-title {
+            figcaption .img-title {
                 margin: 20px 0 0 0;
 
                 color: #a7a0a2;
                 font-size: 16px;
             }
 
-            .img-back {
+            figcaption .img-back {
               position: absolute;
               top: 0;
               left: 0;
@@ -94,7 +94,7 @@ p{padding: 0;margin: 0;}
               backface-visibility: hidden;
             }
 
-              p {
+            figcaption  p {
                 margin: 0;
               }
             
@@ -148,13 +148,11 @@ p{padding: 0;margin: 0;}
                     -moz-osx-font-smoothing: grayscale;
                 }
 
-                .is-inverse {
+                .is-center.is-inverse {
                     background-color: #555;
 
                     transform: rotateY(180deg);
                 }
-            
-        
-    
+
 
 /* controller -- end */
